@@ -27,48 +27,48 @@ function CardCreation() {
 
 
     return (
-        <div className="flex items-center justify-center h-screen bg-gray-100">
+        <div className="d-flex justify-content-center align-items-center vh-100">
             <form
-                className="bg-white p-6 rounded-lg shadow-md w-80"
+                className="bg-dark border border-primary-subtle p-4 rounded shadow w-25 text-light"
                 onSubmit={handleSubmit}
             >
-                <h1 className="text-xl font-bold mb-4 text-center">Card Information</h1>
-                <div className="mb-4">
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                <h1 className="text-center mb-4">Card Information</h1>
+                <div className="mb-3">
+                    <label htmlFor="name" className="form-label">Name</label>
                     <input
                         type="text"
                         id="name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                        className="form-control bg-dark text-white"
                         required
                     />
                 </div>
-                <div className="mb-4">
-                    <label htmlFor="hp" className="block text-sm font-medium text-gray-700">HP</label>
+                <div className="mb-3">
+                    <label htmlFor="hp" className="form-label">HP</label>
                     <input
                         type="number"
                         id="hp"
                         value={hp}
                         onChange={(e) => setHp(e.target.value)}
-                        className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                        className="form-control bg-dark text-white"
                         required
                     />
                 </div>
-                <div className="mb-4">
-                    <label htmlFor="dmg" className="block text-sm font-medium text-gray-700">DMG</label>
+                <div className="mb-3">
+                    <label htmlFor="dmg" className="form-label">DMG</label>
                     <input
                         type="number"
                         id="dmg"
                         value={dmg}
                         onChange={(e) => setDmg(e.target.value)}
-                        className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                        className="form-control bg-dark text-white"
                         required
                     />
                 </div>
                 <button
                     type="submit"
-                    className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
+                    className="btn btn-primary w-100"
                 >
                     Submit
                 </button>
