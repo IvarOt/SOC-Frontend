@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import CardList from "./CardList";
+import CardList from "/src/Pages/CardList";
 
 function Home() {
     return (
