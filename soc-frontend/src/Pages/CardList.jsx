@@ -29,11 +29,19 @@ function CardList() {
                         const passCardToEdit = () => {
                             navigate(`/EditCard/${card.id}`);
                         };
+                        const deleteCard = () => {
+                            fetch(`https://localhost:7146/api/Cards/DeleteCard?id=${card.id}`, {
+                                method: "delete",
+                            })
+                            .catch(error => console.error(error));
+                            window.location.reload();
+                        }
                     return (
                         <div key={index} className="col-md-4 mb-4">
                             <div className="card shadow w25 text-white rounded">
                                 <div className="card-body bg-dark border border-primary-subtle ">
-                                    <button onClick={passCardToEdit}>Edit Card</button>
+                                    <button className='btn btn-primary' onClick={passCardToEdit}>Edit Card</button>
+                                    <button className="btn btn-danger" onClick={deleteCard}>Delete Card</button>
                                     <h2 className="card-title">Name: {card.name}</h2>
                                     <p className="card-subtitle mb-2">HP: {card.hp}</p>
                                     <p className="card-subtitle mb-2">DMG: {card.dmg}</p>
