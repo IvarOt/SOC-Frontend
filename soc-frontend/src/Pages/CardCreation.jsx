@@ -10,7 +10,7 @@ function CardCreation() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        fetch("https://localhost:7146/api/Cards/CreateCard", {
+        await fetch("https://localhost:7146/api/Cards/CreateCard", {
             method: "post",
             headers: {
                 "Accept": "application/json",

@@ -24,7 +24,7 @@ function EditCard() {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
-        fetch("https://localhost:7146/api/Cards/EditCard", {
+        await fetch("https://localhost:7146/api/Cards/EditCard", {
             method: "PUT",
             headers: {
                 "Accept": "application/json",
