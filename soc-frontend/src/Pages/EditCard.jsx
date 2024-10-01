@@ -44,7 +44,7 @@ function EditCard() {
         <div className="container d-flex justify-content-center mt-5">
             <form onSubmit={handleSubmit} className='col-md-4 mb-4'>
                 <h1 className="text-center mb-4">Edit Card</h1>
-                <div className="card bg-warning text-black px-1">
+                <div className="card bg-warning bg-gradient text-black px-3">
                     <div className='card-header d-flex flex-row align-items-center'>
                         <div className="mb-3">
                             <label htmlFor="name" className="form-label">Name</label>
@@ -57,8 +57,8 @@ function EditCard() {
                                 required
                             />
                         </div>                        </div>
-                    <div class="bg-dark d-flex justify-content-center align-items-center">
-                        <img className='img-fluid my-3' width="300" height="300" src="https://png.pngtree.com/png-vector/20230808/ourmid/pngtree-wizard-clipart-wizard-is-holding-a-torch-cartoon-vector-png-image_6827422.png" />
+                    <div className="bg-dark d-flex justify-content-center align-items-center">
+                        <img className='img-fluid' src="https://pics.craiyon.com/2023-10-27/935109ad565d4c8eaa1cad34b175506c.webp" />
                     </div>
                     <div className='card-footer'>
                         <div className="mb-3">

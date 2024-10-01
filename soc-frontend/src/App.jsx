@@ -12,7 +12,6 @@ function App() {
     <>
       <div className='bg-dark text-white min-vh-100'>
         <Navbar />
-        <div className="m-4">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="CardList" element={<CardList />} />
@@ -20,7 +19,6 @@ function App() {
             <Route path="EditCard/:id" element={<EditCard/>} />
             <Route path="DeckListPage" element={<DeckListPage/>} />
           </Routes>
-        </div>
       </div>
     </>
   )
