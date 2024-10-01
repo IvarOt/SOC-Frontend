@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 function EditCard() {
 
-    const {id} = useParams();
+    const { id } = useParams();
     const [name, setName] = useState('');
     const [hp, setHp] = useState('');
     const [dmg, setDmg] = useState('');
@@ -18,13 +18,12 @@ function EditCard() {
                 setDmg(json.dmg)
             })
             .catch(error => console.error(error));
-            console.log(id);
     }, []);
 
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        fetch("https://localhost:7146/api/Cards/EditCard", {
+        await fetch("https://localhost:7146/api/Cards/EditCard", {
             method: "PUT",
             headers: {
                 "Accept": "application/json",
@@ -42,51 +41,57 @@ function EditCard() {
 
 
     return (
-        <div className="d-flex justify-content-center align-items-center vh-100">
-            <form
-                className="bg-dark border border-primary-subtle p-4 rounded shadow w-25 text-light"
-                onSubmit={handleSubmit}
-            >
+        <div className="container d-flex justify-content-center mt-5">
+            <form onSubmit={handleSubmit} className='col-md-4 mb-4'>
                 <h1 className="text-center mb-4">Edit Card</h1>
-                <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Name</label>
-                    <input
-                        type="text"
-                        id="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="form-control bg-dark text-white"
-                        required
-                    />
+                <div className="card bg-warning text-black px-1">
+                    <div className='card-header d-flex flex-row align-items-center'>
+                        <div className="mb-3">
+                            <label htmlFor="name" className="form-label">Name</label>
+                            <input
+                                type="text"
+                                id="name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className="form-control border-dark bg-dark text-white"
+                                required
+                            />
+                        </div>                        </div>
+                    <div class="bg-dark d-flex justify-content-center align-items-center">
+                        <img className='img-fluid my-3' width="300" height="300" src="https://png.pngtree.com/png-vector/20230808/ourmid/pngtree-wizard-clipart-wizard-is-holding-a-torch-cartoon-vector-png-image_6827422.png" />
+                    </div>
+                    <div className='card-footer'>
+                        <div className="mb-3">
+                            <div className='d-flex flex-row align-content-center'>
+                                <img className='me-1' width="20" height="20" src="https://img.icons8.com/fluency/48/hearts.png" alt="hearts" />
+                                <label htmlFor="hp" className="form-label">HP</label>
+                            </div>
+                            <input
+                                type="number"
+                                id="hp"
+                                value={hp}
+                                onChange={(e) => setHp(e.target.value)}
+                                className="form-control border-dark bg-dark text-white"
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <div className='d-flex flex-row align-content-center'>
+                                <img className='me-1' width="20" height="20" src="https://img.icons8.com/windows/32/sword.png" alt="sword" />
+                                <label htmlFor="dmg" className="form-label">DMG</label>
+                            </div>
+                            <input
+                                type="number"
+                                id="dmg"
+                                value={dmg}
+                                onChange={(e) => setDmg(e.target.value)}
+                                className="form-control border-dark bg-dark text-white"
+                                required
+                            />
+                        </div>
+                    </div>
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="hp" className="form-label">HP</label>
-                    <input
-                        type="number"
-                        id="hp"
-                        value={hp}
-                        onChange={(e) => setHp(e.target.value)}
-                        className="form-control bg-dark text-white"
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="dmg" className="form-label">DMG</label>
-                    <input
-                        type="number"
-                        id="dmg"
-                        value={dmg}
-                        onChange={(e) => setDmg(e.target.value)}
-                        className="form-control bg-dark text-white"
-                        required
-                    />
-                </div>
-                <button
-                    type="submit"
-                    className="btn btn-primary w-100"
-                >
-                    Submit
-                </button>
+                <button type="submit" className="btn btn-primary w-100 mt-3">Submit</button>
             </form>
         </div>
     );

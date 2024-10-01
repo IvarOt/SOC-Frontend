@@ -4,6 +4,7 @@ import CardList from './Pages/CardList'
 import CardCreation from './Pages/CardCreation'
 import Navbar from './Components/Navbar'
 import EditCard from './Pages/EditCard.jsx'
+import DeckListPage from './Pages/DeckListPage.jsx'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
             <Route path="CardList" element={<CardList />} />
             <Route path="CardCreation" element={<CardCreation />} />
             <Route path="EditCard/:id" element={<EditCard/>} />
+            <Route path="DeckListPage" element={<DeckListPage/>} />
           </Routes>
         </div>
       </div>
