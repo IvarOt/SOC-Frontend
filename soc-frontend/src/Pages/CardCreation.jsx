@@ -45,7 +45,7 @@ function CardCreation() {
                         </div>
                     </div>
                     <div className="bg-dark d-flex justify-content-center align-items-center">
-                        <img className='img-fluid' src="https://pics.craiyon.com/2023-10-27/935109ad565d4c8eaa1cad34b175506c.webp" />
+                        <img className='img-fluid' src="https://www.awn.com/sites/default/files/styles/original/public/image/attached/1059190-001chasnowtroll191101v083asc300-1280.jpg?itok=7izqoYm1" />
                     </div>
                     <div className='card-footer'>
                         <div className="mb-3">
