@@ -13,8 +13,7 @@ function CardList() {
     };
 
     const deleteCard = async (card) => {
-        console.log("boe");
-        await fetch(`https://localhost:7146/api/Cards/DeleteCard?id=${card.id}`, {
+        await fetch(`https://localhost:7146/Cards?id=${card.id}`, {
             method: "delete",
         })
             .catch(error => console.error(error));
@@ -22,7 +21,7 @@ function CardList() {
     }
 
     useEffect(() => {
-        fetch("https://localhost:7146/api/Cards/GetAllCards")
+        fetch("https://localhost:7146/Cards")
             .then(response => response.json())
             .then(json => setData(json))
             .catch(error => console.error(error));

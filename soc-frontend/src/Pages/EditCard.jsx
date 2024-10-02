@@ -10,7 +10,7 @@ function EditCard() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`https://localhost:7146/api/Cards/GetCard?id=${id}`)
+        fetch(`https://localhost:7146/Cards/${id}`)
             .then(response => response.json())
             .then(json => {
                 setName(json.name)
@@ -23,7 +23,7 @@ function EditCard() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await fetch("https://localhost:7146/api/Cards/EditCard", {
+        await fetch("https://localhost:7146/Cards", {
             method: "PUT",
             headers: {
                 "Accept": "application/json",
