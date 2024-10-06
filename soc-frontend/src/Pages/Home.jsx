@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
-import CardList from "/src/Pages/CardList";
 
 function Home() {
     return (
-            <h1>Jow</h1>
+        <div className="d-flex justify-content-center align-items-center flex-column mt-5">
+    <img src="/Logo.webp" className="w-25 shadow-lg rounded mb-3" alt="Logo" />
+    <h1 className="text-center">Welcome to Saga Of Cards!</h1>
+</div>
     );
 }
 
