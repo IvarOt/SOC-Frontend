@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { deleteCard, editCard, createCard } from "../services/CardService";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import Form from 'react-bootstrap/Form';
 
 export function Card({ card }) {
     return (
@@ -26,7 +27,7 @@ export function Card({ card }) {
 }
 
 export function CardModal({ card = null, isEdit = false }) {
-    const [cardData, setCardData] = useState(card || { name: "", hp: 0, dmg: 0 });
+    const [cardData, setCardData] = useState(card || { name: "", hp: 0, dmg: 0, color: "#563d7c"});
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -48,7 +49,7 @@ export function CardModal({ card = null, isEdit = false }) {
                 {isEdit ? <FontAwesomeIcon icon={faPenToSquare} /> : <FontAwesomeIcon icon={faPlus} />}
             </button>
             <Modal show={show} onHide={handleClose}>
-                <Modal.Body className='bg-info text-dark'>
+                <Modal.Body className='text-dark' style={{backgroundColor: cardData.color}}>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <div className='d-flex flex-row'>
@@ -93,6 +94,13 @@ export function CardModal({ card = null, isEdit = false }) {
                                 className="form-control border-dark bg-dark text-white"
                                 required
                             />
+                            <Form.Label htmlFor="exampleColorInput">Color picker</Form.Label>
+                            <Form.Control
+                                type="color"
+                                value={cardData.color}
+                                title="Choose your color"
+                                onChange={(e) => setCardData({ ...cardData, color: e.target.value})}
+                            />
                         </div>
                         <button type="submit" className="btn btn-primary w-100">
                             {isEdit ? "Update" : "Create"} Card
@@ -113,7 +121,7 @@ export function AdminCard({ card }) {
     return (
         <>
             <div className="col-md-3 mb-4">
-                <div className="card bg-info bg-gradient text-dark px-3 shadow-lg border border-dark">
+                <div className="card bg-gradient text-dark px-3 shadow-lg border border-dark" style={{backgroundColor: card.color}}>
                     <div className='card-header d-flex flex-row align-items-center px-0'>
                         <h3 className="d-flex flex-grow-1">{card.name}</h3>
                         <CardModal card={card} isEdit={true} />
