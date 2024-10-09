@@ -1,23 +1,23 @@
 
-const baseURL = "https://localhost:7146/Cards";
+const baseURL = "https://localhost:7146/";
 
 const api = {
-    get: (endpoint = "") => fetch(`${baseURL}/${endpoint}`),
-    post: (body, endpoint = "") => fetch(`${baseURL}/${endpoint}`, {
+    get: (controller, endpoint = "") => fetch(`${baseURL}${controller}/${endpoint}`),
+    post: (controller, body, endpoint = "") => fetch(`${baseURL}${controller}/${endpoint}`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
         body: body && JSON.stringify(body),
     }),
-    put: (body, endpoint = "") => fetch(`${baseURL}/${endpoint}`, {
+    put: (controller, body, endpoint = "") => fetch(`${baseURL}${controller}/${endpoint}`, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json'
         },
         body: body && JSON.stringify(body),
     }),
-    delete: (id) => fetch(`${baseURL}?id=${id}`, {
+    delete: (controller, id, endpoint = "") => fetch(`${baseURL}${controller}/${endpoint}?id=${id}`, {
         method: "DELETE",
     }),
 };

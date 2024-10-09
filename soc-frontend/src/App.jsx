@@ -1,8 +1,10 @@
 import { Routes, Route } from 'react-router-dom'
 import Home from "./pages/Home"
-import CardList from './pages/CardList.jsx'
+import CardManager from './cards/CardManager.jsx'
 import Navbar from './components/Navbar'
-import DeckListPage from './pages/DeckListPage.jsx'
+import DeckManager from './decks/DeckManager.jsx'
+import SignUp from './pages/SignUp.jsx'
+import Login from './pages/Login.jsx'
 
 function App() {
 
@@ -11,8 +13,11 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="CardList" element={<CardList />} />
-        <Route path="DeckListPage" element={<DeckListPage />} />
+        <Route path="CardList" element={<CardManager />} />
+        <Route path="DeckListPage" element={<DeckManager />} />
+        <Route path="SignUp" element={<SignUp />} />
+        <Route path="Login" element={<Login />} />
+
       </Routes>
     </div>
   )
