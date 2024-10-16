@@ -1,6 +1,21 @@
-
+import { useEffect, useState } from "react";
+import { useGetPlayer } from "../hooks/PlayerHooks"
 
 export default function Profile() {
+    const { player } = useGetPlayer();
+
+    if (!player) {
+        return  (
+<>
+                <div className='d-flex justify-content-center mt-5'>
+                    <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </>
+        )
+        
+    }
     return (
         <>
             <div className="row d-flex justify-content-center align-items-center mt-5">
@@ -10,8 +25,8 @@ export default function Profile() {
                             <div className="col-md-3 gradient-custom text-center pb-3 bg-dark bg-gradient">
                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
                                     alt="Avatar" className="img-fluid my-5" />
-                                <h5>Bob</h5>
-                                <p>Bob@gmail.com</p>
+                                <h5>{player.username}</h5>
+                                <p>{player.email}</p>
                                 <i className="far fa-edit mb-5"></i>
                             </div>
                             <div className="col-md-8">
@@ -19,18 +34,19 @@ export default function Profile() {
                                     <h6>Match history</h6>
                                     <div className='border my-3 p-3 border-danger'>
                                         <div className="d-flex justify-content-between">
-                                            <span>bob vs AI</span>
+                                            <span>opponent: AI</span>
                                             <span>16-10-2024</span>
                                         </div>
-                                        <div>gewonnen knul</div>
+                                        <div>Lost</div>
                                     </div>
                                     <div className='border p-3 border-success'>
                                         <div className="d-flex justify-content-between">
-                                            <span>bob vs AI</span>
+                                            <span>opponent: AI</span>
                                             <span>16-10-2024</span>
                                         </div>
-                                        <div>gewonnen knul</div>
+                                        <div>Won</div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

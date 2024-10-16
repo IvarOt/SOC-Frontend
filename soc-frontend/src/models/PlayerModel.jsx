@@ -23,3 +23,10 @@ export class LoginPlayerRequest {
         this.password = password;
     }
 }
+
+export class ProfilePlayerRequest {
+    constructor(username, email) {
+        this.username = username;
+        this.email = email;
+    }
+}

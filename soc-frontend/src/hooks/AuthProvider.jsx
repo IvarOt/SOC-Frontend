@@ -28,7 +28,8 @@ const AuthProvider = ({ children }) => {
             const response = await loginPlayer(data);
             if (response) {
                 setToken(response.token);
-                setUser(response.username);
+                const decodedUser = jwtDecode(response.token);
+                setUser(decodedUser);
                 localStorage.setItem("site", response.token);
                 navigate("/CardList");
                 return;
