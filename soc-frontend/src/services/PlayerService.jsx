@@ -3,10 +3,10 @@ import { api } from '../adapters/api'
 const controller = "Player";
 
 //Admin?
-export const getPlayers = async () => api.get(controller).then((data) => data.json());
+export const getPlayers = async () => api.get(controller);
 
 //profile
-export const getPlayer = async (id) => api.get(controller, id).then((data) => data.json());
+export const getPlayer = async (id) => api.get(controller, id);
 
 //sign up
 export const createAccount = async (player) => api.post(controller, player);
