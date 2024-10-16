@@ -3,9 +3,11 @@ import Form from 'react-bootstrap/Form';
 import { useCreateAccount } from '../hooks/PlayerHooks'; 
 import { useState } from 'react';
 import { RegisterPlayerRequest } from '../models/PlayerModel';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignUp() {
     const { createAccount, isLoading } = useCreateAccount();
+    const navigate = useNavigate();
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -34,10 +36,11 @@ export default function SignUp() {
         zIndex: 1, /* Ensure it's below the form */
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const player = new RegisterPlayerRequest(username, email, password, confirmPassword);
-        createAccount(player);
+        await createAccount(player);
+        navigate("/login");
     }
 
     return (

@@ -4,12 +4,12 @@ import { createEditCardRequest } from './CardModel';
 const controller = "Cards";
 
 export const getCards = async () => {
-    const data = await api.get(controller).then((data) => data.json());
+    const data = await api.get(controller);
     return data.map(createEditCardRequest);
 }
 
 export const getCard = async (id) => {
-    const data = api.get(controller, id).then((data) => data.json())
+    const data = api.get(controller, id);
     return data.map(createEditCardRequest);
 } 
 

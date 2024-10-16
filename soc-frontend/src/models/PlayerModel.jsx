@@ -16,3 +16,10 @@ export class RegisterPlayerRequest {
         this.confirmPassword = confirmPassword;
     }
 }
+
+export class LoginPlayerRequest {
+    constructor(username, password) {
+        this.username = username;
+        this.password = password;
+    }
+}
