@@ -21,7 +21,7 @@ const api = {
     get: (controller, endpoint) => request(controller, null, endpoint, 'GET'),
     post: (controller, body, endpoint) => request(controller, body, endpoint, 'POST'),
     put: (controller, body, endpoint) => request(controller, body, endpoint, 'PUT'),
-    delete: (controller, id, endpoint) => request(controller, {id}, endpoint, 'DELETE'),
+    delete: (controller, id) => request(controller, null, id, 'DELETE'),
 };
 
 function handleResponse(response) {
