@@ -1,6 +1,6 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginPlayer } from "../services/PlayerService";
+import { loginPlayer } from "./PlayerService";
 import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext();
