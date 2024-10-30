@@ -11,7 +11,7 @@ export default function Login() {
         backgroundPosition: 'center',
         height: '100vh',
         width: '100%',
-        position: 'relative', // Allows absolute positioning for the blurred background
+        position: 'relative', 
         overflow: "hidden",
     };
     const blurredBackground = {
@@ -23,8 +23,8 @@ export default function Login() {
         backgroundImage: "url('https://i.pinimg.com/originals/af/b6/3f/afb63f2a1cd543fecfa36996f10c3bf0.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        filter: "blur(5px)", /* Adjust blur intensity */
-        zIndex: 1, /* Ensure it's below the form */
+        filter: "blur(5px)", 
+        zIndex: 1, 
     }
     const auth = useAuth();
     const [username, setUsername] = useState("");
@@ -53,6 +53,7 @@ export default function Login() {
                     <Form.Group className="mb-4 w-75" controlId="formBasicPassword">
                         <Form.Label className='text-white'>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+                    {auth.errorMessage && <div className="text-danger">{auth.errorMessage}</div>}
                     </Form.Group>
                     <Button variant="primary" type="submit" className='mb-5 w-75'>
                         Submit

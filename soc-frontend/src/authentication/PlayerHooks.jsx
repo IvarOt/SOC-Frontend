@@ -4,18 +4,21 @@ import { useAuth } from "../authentication/AuthProvider"
 
 const useAsync = (asyncFunction) => {
     const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(null);
 
     const execute = async (...args) => {
         setIsLoading(true);
+        setErrorMessage(null);
         try {
             await asyncFunction(...args);
         } catch (error) {
             console.error("Error in execute:", error);
+            setErrorMessage(error.response.data.Message);
         } finally {
             setIsLoading(false);
         }
     };
-    return { execute, isLoading };
+    return { execute, isLoading, errorMessage };
 }
 
 
@@ -37,8 +40,8 @@ export const useGetPlayer = () => {
     const [player, setPlayer] = useState([]);
     const { user } = useAuth();
     const { execute, isLoading } = useAsync(async (id) => {
-        const playerData = await playerService.getPlayer(id);
-        setPlayer(playerData);
+        const response = await playerService.getPlayer(id);
+        setPlayer(response.data);
     });
 
     useEffect(() => {
@@ -51,8 +54,8 @@ export const useGetPlayer = () => {
 }
 
 export const useCreateAccount = () => {
-    const { execute, isLoading } = useAsync(playerService.createAccount);
-    return { createAccount: execute, isLoading };
+    const { execute, isLoading, errorMessage } = useAsync(playerService.createAccount);
+    return { createAccount: execute, isLoading, errorMessage };
 }
 
 export const useEditProfile = () => {

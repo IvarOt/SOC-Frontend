@@ -1,23 +1,23 @@
-import { api } from '../adapters/api'
+import { instance } from '../api/api';
 
 const controller = "Player";
 
 //Admin?
-export const getPlayers = async () => api.get(controller);
+export const getPlayers = async () => instance.get(controller);
 
 //profile
-export const getPlayer = async (id) => api.get(controller, id);
+export const getPlayer = async (id) => instance.get(`${controller}/${id}`);
 
 //sign up
-export const createAccount = async (player) => api.post(controller, player);
+export const createAccount = async (player) => instance.post(controller, player);
 
 //changing account information
-export const editProfile = async (player) => api.put(controller, player);
+export const editProfile = async (player) => instance.put(controller, player);
 
 //neccessary?
-export const deleteAccount = async (id) => api.delete(controller, id);
+export const deleteAccount = async (id) => instance.delete(`${controller}/${id}`);
 
 export const loginPlayer = async (player) => {
-    const response = await api.post(controller, player, "login");
+    const response = await instance.post(`${controller}/Login`, player);
     return response;
 };

@@ -8,6 +8,7 @@ import Login from './authentication/Login.jsx'
 import AuthProvider from './authentication/AuthProvider.jsx'
 import PrivateRoute from './authentication/PrivateRoute.jsx'
 import Profile from './authentication/Profile.jsx'
+import './api/Interceptors'
 
 function App() {
 
