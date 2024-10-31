@@ -1,14 +1,13 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useCreateAccount } from '../hooks/PlayerHooks'; 
+import { useCreateAccount } from '../authentication/PlayerHooks';
 import { useState } from 'react';
-import { RegisterPlayerRequest } from '../models/PlayerModel';
+import { RegisterPlayerRequest } from './PlayerModel';
 import { useNavigate } from 'react-router-dom';
 
 export default function SignUp() {
-    const { createAccount, isLoading } = useCreateAccount();
+    const { createAccount, isLoading, errorMessage } = useCreateAccount();
     const navigate = useNavigate();
-
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -20,7 +19,7 @@ export default function SignUp() {
         backgroundPosition: 'center',
         height: '100vh',
         width: '100%',
-        position: 'relative', // Allows absolute positioning for the blurred background
+        position: 'relative',
         overflow: "hidden",
     };
     const blurredBackground = {
@@ -32,15 +31,18 @@ export default function SignUp() {
         backgroundImage: "url('https://i.pinimg.com/originals/af/b6/3f/afb63f2a1cd543fecfa36996f10c3bf0.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        filter: "blur(5px)", /* Adjust blur intensity */
-        zIndex: 1, /* Ensure it's below the form */
+        filter: "blur(5px)",
+        zIndex: 1,
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const player = new RegisterPlayerRequest(username, email, password, confirmPassword);
         await createAccount(player);
-        navigate("/login");
+        console.log(errorMessage);
+        if (errorMessage === null && !isLoading) {
+            navigate("/login");
+        }
     }
 
     return (
@@ -59,13 +61,14 @@ export default function SignUp() {
                         <Form.Label className='text-white'>Email address</Form.Label>
                         <Form.Control value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter email" />
                     </Form.Group>
-                    <Form.Group className="mb-4 w-75" controlId="formBasicPassword">
+                    <Form.Group className="mb-3 w-75" controlId="formBasicPassword">
                         <Form.Label className='text-white'>Password</Form.Label>
                         <Form.Control value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
                     </Form.Group>
-                    <Form.Group className="mb-4 w-75" controlId="formConfirmPassword">
+                    <Form.Group className="mb-3 w-75" controlId="formConfirmPassword">
                         <Form.Label className='text-white'>Confirm Password</Form.Label>
                         <Form.Control value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" placeholder="Confirm password" />
+                        {errorMessage && <div className="text-danger">{errorMessage}</div>}
                     </Form.Group>
                     <Button variant="primary" type="submit" className='mb-5 w-75'>
                         Submit
