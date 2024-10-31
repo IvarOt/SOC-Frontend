@@ -17,4 +17,4 @@ export const createCard = async (card) => instance.post(controller, card);
 
 export const editCard = async (card) => instance.put(controller, card);
 
-export const deleteCard = async (id) => instance.delete(controller, id);
+export const deleteCard = async (id) => instance.delete(`${controller}/${id}`);

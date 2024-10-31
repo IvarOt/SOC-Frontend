@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../authentication/AuthProvider";
 
 function Navbar() {
-    const { user, logout } = useAuth();
+    const { token, logout } = useAuth();
     return (
         <nav className="navbar bg-dark-subtle border-bottom border-body" data-bs-theme="dark">
             <div className="container-fluid">
@@ -26,7 +26,7 @@ function Navbar() {
 
                 <div className="d-flex justify-content-end align-items-center ms-auto">
                     <ul className="navbar-nav d-flex flex-row align-items-center">
-                        {!user ? (
+                        {!token ? (
                             <>
                                 <li className="nav-item me-4">
                                     <Link to="/Login" className="nav-link active">
