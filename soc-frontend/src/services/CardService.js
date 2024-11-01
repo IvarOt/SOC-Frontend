@@ -14,12 +14,16 @@ export const getCard = async (id) => {
     return data.map(createEditCardRequest);
 } 
 
-export const createCard = async (card) => instance.post("https://localhost:7146/Cards", card, {
+export const createCard = async (card) => instance.post(controller, card, {
     headers: {
         'Content-Type': "multipart/form-data",
     },
 }) 
 
-export const editCard = async (card) => instance.put(controller, card);
+export const editCard = async (card) => instance.put(controller, card, {
+    headers: {
+        'Content-Type': "multipart/form-data",
+    },
+});
 
 export const deleteCard = async (id) => instance.delete(`${controller}/${id}`);

@@ -42,9 +42,9 @@ export function CardModal({ card = null, isEdit = false, createCard, editCard })
     const [hp, setHp] = useState(card ? card.hp : 0);
     const [dmg, setDmg] = useState(card ? card.dmg : 0);
     const [color, setColor] = useState(card ? card.color : "#FFFFFF");
-    const [image, setImage] = useState(card ? card.imageURL : imagePlaceholder);
+    const [image, setImage] = useState(null);
     const [textColor, setTextColor] = useState(getContrastYIQ(color));
-    const [imagePreview, setImagePreview] = useState(card? card.imageURL : imagePlaceholder);
+    const [imagePreview, setImagePreview] = useState(card ? card.imageURL : imagePlaceholder);
 
     useEffect(() => {
         setTextColor(getContrastYIQ(color));
@@ -69,8 +69,16 @@ export function CardModal({ card = null, isEdit = false, createCard, editCard })
     const handleSubmit = (e) => {
         e.preventDefault();
         if (isEdit) {
-            const editCardRequest = new EditCardRequest(card.id, name, hp, dmg, color);
-            editCard(editCardRequest)
+            const formData = new FormData();
+            formData.append("Id", card.id);
+            formData.append("Name", name);
+            formData.append("HP", hp);
+            formData.append("DMG", dmg);
+            formData.append("Color", color);
+            if (image) {
+                formData.append("Image", image);
+            }
+            editCard(formData)
         }
         else if (!isEdit) {
             const formData = new FormData();
@@ -78,7 +86,9 @@ export function CardModal({ card = null, isEdit = false, createCard, editCard })
             formData.append("HP", hp);
             formData.append("DMG", dmg);
             formData.append("Color", color);
-            formData.append("Image", image);
+            if (image) {
+                formData.append("Image", image);
+            }
             createCard(formData);
         }
         handleClose();
@@ -110,7 +120,7 @@ export function CardModal({ card = null, isEdit = false, createCard, editCard })
                                 className='img-fluid'
                                 src={imagePreview}
                                 alt="Card Image"
-                                style={{maxHeight:"300px", objectFit:"cover", width:"100%", height:"100%"}}
+                                style={{ maxHeight: "300px", objectFit: "cover", width: "100%", height: "100%" }}
                             />
                         </div>
                         <div className='modal-footer d-flex flex-column justify-content-start'>
@@ -175,10 +185,10 @@ export function AdminCard({ card, deleteCard, editCard, createCard }) {
                         </button>
                     </div>
                     <div className="bg-light bg-gradient d-flex justify-content-center align-items-center shadow-lg">
-                        <img 
-                        className='img-fluid' 
-                        src={card.imageURL} 
-                        style={{width:"100%", height:"300px", objectFit:"cover"}}
+                        <img
+                            className='img-fluid'
+                            src={card.imageURL}
+                            style={{ width: "100%", height: "300px", objectFit: "cover" }}
                         />
                     </div>
                     <div className='card-footer px-0'>
