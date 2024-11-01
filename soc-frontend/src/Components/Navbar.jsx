@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "../authentication/AuthProvider";
+import { useAuth } from "../contexts/AuthContext";
 
 function Navbar() {
     const { token, logout } = useAuth();
@@ -14,11 +14,6 @@ function Navbar() {
                         <li className="nav-item me-4">
                             <Link to="/CardList" className="nav-link active">
                                 <img width="24" height="24" src="https://img.icons8.com/material-outlined/24/FFFFFF/bank-card-back-side.png" alt="bank-card-back-side" />Cards
-                            </Link>
-                        </li>
-                        <li className="nav-item me-4">
-                            <Link to="/DeckListPage" className="nav-link active">
-                                <img width="24" height="24" src="https://img.icons8.com/material-outlined/24/FFFFFF/gallery.png" alt="gallery" />Decks
                             </Link>
                         </li>
                     </ul>

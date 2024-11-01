@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import * as cardService from "./CardService"
+import * as cardService from "../services/CardService"
 
 export const useGetCards = () => {
     const [isLoading, setIsLoading] = useState(false);

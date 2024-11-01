@@ -1,5 +1,5 @@
 import { instance } from '../api/api'
-import { createEditCardRequest } from './CardModel';
+import { createEditCardRequest } from '../models/CardModel';
 
 const controller = "Cards";
 

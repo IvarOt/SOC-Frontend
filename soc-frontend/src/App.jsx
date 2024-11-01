@@ -1,13 +1,12 @@
 import { Routes, Route } from 'react-router-dom'
 import Home from "./pages/Home"
-import CardManager from './cards/CardManager.jsx'
+import CardManager from './pages/CardManager.jsx'
 import Navbar from './components/Navbar'
-import DeckManager from './decks/DeckManager.jsx'
-import SignUp from './authentication/SignUp.jsx'
-import Login from './authentication/Login.jsx'
-import AuthProvider from './authentication/AuthProvider.jsx'
-import PrivateRoute from './authentication/PrivateRoute.jsx'
-import Profile from './authentication/Profile.jsx'
+import SignUp from './pages/SignUp.jsx'
+import Login from './pages/Login.jsx'
+import AuthProvider from './contexts/AuthContext.jsx'
+import PrivateRoute from './components/PrivateRoute.jsx'
+import Profile from './pages/Profile.jsx'
 import './api/Interceptors'
 
 function App() {
@@ -22,7 +21,6 @@ function App() {
           <Route path="Login" element={<Login />} />
           <Route element={<PrivateRoute />}>
             <Route path="CardList" element={<CardManager />} />
-            <Route path="DeckListPage" element={<DeckManager />} />
             <Route path="Profile" element={<Profile />} />
           </Route>
         </Routes>

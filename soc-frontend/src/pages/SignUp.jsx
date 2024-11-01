@@ -1,8 +1,8 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useCreateAccount } from '../authentication/PlayerHooks';
+import { useCreateAccount } from '../hooks/PlayerHooks';
 import { useState } from 'react';
-import { RegisterPlayerRequest } from './PlayerModel';
+import { RegisterPlayerRequest } from '../models/PlayerModel';
 import { useNavigate } from 'react-router-dom';
 
 export default function SignUp() {

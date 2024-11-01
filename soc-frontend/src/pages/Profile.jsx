@@ -1,4 +1,4 @@
-import { useGetPlayer } from "../authentication/PlayerHooks"
+import { useGetPlayer } from "../hooks/PlayerHooks"
 
 export default function Profile() {
     const { player, isLoading } = useGetPlayer();
