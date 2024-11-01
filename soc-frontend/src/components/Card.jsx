@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Form from 'react-bootstrap/Form';
-import { CreateCardRequest, EditCardRequest } from './CardModel';
+import { CreateCardRequest, EditCardRequest } from '../models/CardModel';
 
 function getContrastYIQ(hexColor) {
     hexColor = hexColor.replace("#", "");

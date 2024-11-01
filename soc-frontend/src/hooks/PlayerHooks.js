@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import * as playerService from "/src/authentication/playerService"
-import { useAuth } from "../authentication/AuthProvider"
+import * as playerService from "../services/PlayerService"
+import { useAuth } from "../contexts/AuthContext"
 
 const useAsync = (asyncFunction) => {
     const [isLoading, setIsLoading] = useState(false);

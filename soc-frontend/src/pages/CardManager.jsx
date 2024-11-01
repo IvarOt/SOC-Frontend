@@ -1,6 +1,5 @@
-import { AdminCard } from '/src/cards/Card'
-import { CardModal } from './Card';
-import { useGetCards, useCreateCard, useEditCard, useDeleteCard } from './CardHooks';
+import { CardModal, AdminCard } from '../components/Card';
+import { useGetCards, useCreateCard, useEditCard, useDeleteCard } from '../hooks/CardHooks';
 
 export default function CardManager() {
     const { cards, refreshItems, isLoading } = useGetCards();

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useAuth } from "./AuthProvider";
-import { LoginPlayerRequest } from './PlayerModel';
+import { useAuth } from "../contexts/AuthContext";
+import { LoginPlayerRequest } from '../models/PlayerModel';
 
 export default function Login() {
     const backgroundStyle = {
