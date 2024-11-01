@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Form from 'react-bootstrap/Form';
-import { CreateCardRequest, EditCardRequest } from '../models/CardModel';
+import { EditCardRequest } from '../models/CardModel';
 
 function getContrastYIQ(hexColor) {
     hexColor = hexColor.replace("#", "");
@@ -19,12 +19,12 @@ export function Card({ card }) {
     return (
         <>
             <div className="col-md-3 mb-4">
-                <div className="card bg-info bg-gradient px-3" style={{color: textColor}}>
+                <div className="card bg-info bg-gradient px-3" style={{ color: textColor }}>
                     <div className='card-header d-flex flex-row align-items-center px-0'>
                         <h1 className="d-flex flex-grow-1">{card.name}</h1>
                     </div>
                     <div className="bg-light bg-gradient d-flex justify-content-center align-items-center shadow-lg">
-                        <img className='img-fluid' src="https://www.awn.com/sites/default/files/styles/original/public/image/attached/1059190-001chasnowtroll191101v083asc300-1280.jpg?itok=7izqoYm1" alt="placeholder"/>
+                        <img className='img-fluid' src={card.imageURL} alt="placeholder" />
                     </div>
                     <div className='card-footer px-0'>
                         <p className="mb-2"><img width="30" height="30" src="https://img.icons8.com/fluency/48/hearts.png" alt="hearts" /> {card.hp}</p>
@@ -37,12 +37,14 @@ export function Card({ card }) {
 }
 
 export function CardModal({ card = null, isEdit = false, createCard, editCard }) {
-    const [name, setName] = useState(card ? card.name : ""); 
-    const [hp, setHp] = useState(card? card.hp : 0);
-    const [dmg, setDmg] = useState(card? card.dmg : 0);
-    const [color, setColor] = useState(card? card.color : "#FFFFFF");
-
+    const imagePlaceholder = "https://imgv3.fotor.com/images/gallery/cartoon-character-generated-by-Fotor-ai-art-creator.jpg"
+    const [name, setName] = useState(card ? card.name : "");
+    const [hp, setHp] = useState(card ? card.hp : 0);
+    const [dmg, setDmg] = useState(card ? card.dmg : 0);
+    const [color, setColor] = useState(card ? card.color : "#FFFFFF");
+    const [image, setImage] = useState(card ? card.imageURL : imagePlaceholder);
     const [textColor, setTextColor] = useState(getContrastYIQ(color));
+    const [imagePreview, setImagePreview] = useState(card? card.imageURL : imagePlaceholder);
 
     useEffect(() => {
         setTextColor(getContrastYIQ(color));
@@ -52,6 +54,18 @@ export function CardModal({ card = null, isEdit = false, createCard, editCard })
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const hanleImageChange = (e) => {
+        const selectedImage = e.target.files[0];
+        if (selectedImage) {
+            setImage(selectedImage);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(selectedImage);
+        }
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (isEdit) {
@@ -59,8 +73,13 @@ export function CardModal({ card = null, isEdit = false, createCard, editCard })
             editCard(editCardRequest)
         }
         else if (!isEdit) {
-            const createCardRequest = new CreateCardRequest(name, hp, dmg, color);
-            createCard(createCardRequest);
+            const formData = new FormData();
+            formData.append("Name", name);
+            formData.append("HP", hp);
+            formData.append("DMG", dmg);
+            formData.append("Color", color);
+            formData.append("Image", image);
+            createCard(formData);
         }
         handleClose();
     };
@@ -86,11 +105,12 @@ export function CardModal({ card = null, isEdit = false, createCard, editCard })
                                 required
                             />
                         </div>
-                        <div className="bg-dark d-flex justify-content-center align-items-center shadow-lg">
+                        <div className="bg-light bg-gradient d-flex justify-content-center align-items-center shadow-lg">
                             <img
                                 className='img-fluid'
-                                src="https://www.awn.com/sites/default/files/styles/original/public/image/attached/1059190-001chasnowtroll191101v083asc300-1280.jpg?itok=7izqoYm1"
+                                src={imagePreview}
                                 alt="Card Image"
+                                style={{maxHeight:"300px", objectFit:"cover", width:"100%", height:"100%"}}
                             />
                         </div>
                         <div className='modal-footer d-flex flex-column justify-content-start'>
@@ -123,6 +143,12 @@ export function CardModal({ card = null, isEdit = false, createCard, editCard })
                                 title="Choose your color"
                                 onChange={(e) => setColor(e.target.value)}
                             />
+                            <Form.Control
+                                type="file"
+                                title="Upload an Image"
+                                accept="image/*"
+                                onChange={hanleImageChange}
+                            />
                         </div>
                         <button type="submit" className="btn btn-primary w-100">
                             {isEdit ? "Edit Card" : "Create Card"}
@@ -149,7 +175,11 @@ export function AdminCard({ card, deleteCard, editCard, createCard }) {
                         </button>
                     </div>
                     <div className="bg-light bg-gradient d-flex justify-content-center align-items-center shadow-lg">
-                        <img className='img-fluid' src="https://www.awn.com/sites/default/files/styles/original/public/image/attached/1059190-001chasnowtroll191101v083asc300-1280.jpg?itok=7izqoYm1" />
+                        <img 
+                        className='img-fluid' 
+                        src={card.imageURL} 
+                        style={{width:"100%", height:"300px", objectFit:"cover"}}
+                        />
                     </div>
                     <div className='card-footer px-0'>
                         <p className="mb-2"><img width="30" height="30" src="https://img.icons8.com/fluency/48/hearts.png" alt="hearts" /> {card.hp}</p>

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { instance } from '../api/api'
 import { createEditCardRequest } from '../models/CardModel';
 
@@ -13,7 +14,11 @@ export const getCard = async (id) => {
     return data.map(createEditCardRequest);
 } 
 
-export const createCard = async (card) => instance.post(controller, card);
+export const createCard = async (card) => instance.post("https://localhost:7146/Cards", card, {
+    headers: {
+        'Content-Type': "multipart/form-data",
+    },
+}) 
 
 export const editCard = async (card) => instance.put(controller, card);
 
