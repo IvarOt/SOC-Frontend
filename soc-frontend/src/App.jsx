@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import Home from "./pages/Home"
+import Home from "./pages/Home.jsx"
 import CardManager from './pages/CardManager.jsx'
 import Navbar from './components/Navbar'
 import SignUp from './pages/SignUp.jsx'
