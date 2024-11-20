@@ -1,13 +1,13 @@
 import { Routes, Route } from 'react-router-dom'
-import Home from "./pages/Home.jsx"
-import CardManager from './pages/CardManager.jsx'
-import Navbar from './components/Navbar'
-import SignUp from './pages/SignUp.jsx'
-import Login from './pages/Login.jsx'
-import AuthProvider from './contexts/AuthContext.jsx'
-import PrivateRoute from './components/PrivateRoute.jsx'
-import Profile from './pages/Profile.jsx'
-import './api/Interceptors'
+import Home from "/src/pages/Home.jsx"
+import CardManager from '/src/pages/CardManager.jsx'
+import Navbar from '/src/components/Navbar'
+import SignUp from '/src/pages/SignUp.jsx'
+import Login from '/src/pages/Login.jsx'
+import AuthProvider from '/src/contexts/AuthContext.jsx'
+import PrivateRoute from '/src/components/PrivateRoute.jsx'
+import Profile from '/src/pages/Profile.jsx'
+import '/src/api/Interceptors'
 
 function App() {
 
