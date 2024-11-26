@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 function Navbar() {
     const { token, logout } = useAuth();
     return (
-        <nav className="navbar bg-dark-subtle border-bottom border-body" data-bs-theme="dark">
+        <nav className="navbar bg-dark-subtle border-bottom border-body" data-bs-theme="dark" style={{zIndex:"2"}}>
             <div className="container-fluid">
                 <div className="d-flex flex-row align-items-center mx-4">
                     <Link to="/" className="navbar-brand"> 
