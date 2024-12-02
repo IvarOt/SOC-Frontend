@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Form from 'react-bootstrap/Form';
 import { EditCardRequest } from '../models/CardModel';
+import { DeleteConfirmationModal } from './DeleteConfirmationModal';
 
 function getContrastYIQ(hexColor) {
     hexColor = hexColor.replace("#", "");
@@ -173,14 +174,17 @@ export function CardModal({ card = null, isEdit = false, createCard, editCard })
 
 export function AdminCard({ card, deleteCard, editCard, createCard }) {
     const textColor = getContrastYIQ(card.color);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+
     return (
         <>
+        <DeleteConfirmationModal show={showDeleteModal} onClose={() => setShowDeleteModal(false)} onConfirm={() => deleteCard(card)} />
             <div className="col-md-3 mb-4">
                 <div className="card bg-gradient px-3 shadow-lg border border-dark" style={{ backgroundColor: card.color, color: textColor }}>
                     <div className='card-header d-flex flex-row align-items-center px-0'>
                         <h3 className="d-flex flex-grow-1">{card.name}</h3>
                         <CardModal card={card} isEdit={true} editCard={editCard} createCard={createCard} />
-                        <button className='btn btn-danger' onClick={() => deleteCard(card)}>
+                        <button className='btn btn-danger' onClick={() => setShowDeleteModal(true)}>
                             <FontAwesomeIcon icon={faTrash} />
                         </button>
                     </div>
