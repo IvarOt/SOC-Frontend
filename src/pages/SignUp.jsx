@@ -7,20 +7,26 @@ import { useNavigate } from 'react-router-dom';
 import { blurredBackground } from '../BackgroundStyling';
 
 export default function SignUp() {
-    const { createAccount, isLoading, errorMessage } = useCreateAccount();
+    const { createAccount, isLoading } = useCreateAccount();
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [exception, setException] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const player = new RegisterPlayerRequest(username, email, password, confirmPassword);
-        await createAccount(player);
-        console.log(errorMessage);
-        if (errorMessage === null && !isLoading) {
-            navigate("/login");
+        try {
+            await createAccount(player);
+            if (exception !== null) {
+                navigate("/login");
+            }
+        }
+        catch (error) {
+            console.error(error);
+            setException(error);
         }
     }
 
@@ -47,7 +53,13 @@ export default function SignUp() {
                     <Form.Group className="mb-3 w-75" controlId="formConfirmPassword">
                         <Form.Label className='text-white'>Confirm Password</Form.Label>
                         <Form.Control data-test="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" placeholder="Confirm password" />
-                        {errorMessage && <div data-test="exceptionMessage" className="text-danger">{errorMessage}</div>}
+                        {exception && (
+                            <>
+                                <div data-test="exceptionMessage" className="text-danger">
+                                    {exception.response.data.errors.Password[0]}
+                                </div>
+                            </>
+                        )}
                     </Form.Group>
                     <Button data-test="signup-btn" variant="primary" type="submit" className='mb-5 w-75'>
                         Submit
