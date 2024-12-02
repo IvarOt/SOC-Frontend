@@ -34,22 +34,22 @@ export default function SignUp() {
                     </div>
                     <Form.Group className="my-3 w-75">
                         <Form.Label className='text-white'>Username</Form.Label>
-                        <Form.Control id='username' value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Enter Username" />
+                        <Form.Control data-test="username" value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Enter Username" />
                     </Form.Group>
                     <Form.Group className="mb-3 w-75" controlId="formBasicEmail">
                         <Form.Label className='text-white'>Email address</Form.Label>
-                        <Form.Control id='email' value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter email" />
+                        <Form.Control data-test="email" value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter email" />
                     </Form.Group>
                     <Form.Group className="mb-3 w-75" controlId="formBasicPassword">
                         <Form.Label className='text-white'>Password</Form.Label>
-                        <Form.Control id='password' value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
+                        <Form.Control data-test="password" value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
                     </Form.Group>
                     <Form.Group className="mb-3 w-75" controlId="formConfirmPassword">
                         <Form.Label className='text-white'>Confirm Password</Form.Label>
-                        <Form.Control id='confirmPassword' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" placeholder="Confirm password" />
-                        {errorMessage && <div className="text-danger">{errorMessage}</div>}
+                        <Form.Control data-test="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" placeholder="Confirm password" />
+                        {errorMessage && <div data-test="exceptionMessage" className="text-danger">{errorMessage}</div>}
                     </Form.Group>
-                    <Button id='signup-btn' variant="primary" type="submit" className='mb-5 w-75'>
+                    <Button data-test="signup-btn" variant="primary" type="submit" className='mb-5 w-75'>
                         Submit
                     </Button>
                 </Form>
