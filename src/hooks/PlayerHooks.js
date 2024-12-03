@@ -59,7 +59,8 @@ export const useCreateAccount = () => {
     const createAccount = async (player) => {
         setIsLoading(true);
         try {
-            await playerService.createAccount(player);
+            const response = await playerService.createAccount(player);
+            return response;
         } 
         catch (error) {
             setIsLoading(false);

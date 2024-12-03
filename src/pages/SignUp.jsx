@@ -13,20 +13,29 @@ export default function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [exception, setException] = useState(null);
+    const [errors, setErrors] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const player = new RegisterPlayerRequest(username, email, password, confirmPassword);
         try {
-            await createAccount(player);
-            if (exception !== null) {
+            const response = await createAccount(player);
+            console.log(response);
+            if (response.status === 200) {
                 navigate("/login");
+            }
+            else if (response.status === 400) {
+                const apiErrors = response.data.errors;
+                setErrors(apiErrors);
             }
         }
         catch (error) {
-            console.error(error);
-            setException(error);
+            if (error.response && error.response.status === 400) {
+                const apiErrors = error.response.data.errors;
+                setErrors(apiErrors);
+            } else {
+                console.error("Error in SignUp:", error);
+            }
         }
     }
 
@@ -41,6 +50,9 @@ export default function SignUp() {
                     <Form.Group className="my-3 w-75">
                         <Form.Label className='text-white'>Username</Form.Label>
                         <Form.Control data-test="username" value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Enter Username" />
+                        {errors?.Username && errors.Username.map((error, index) => (
+                            <div key={index} data-test="usernameError" className="text-danger">{error}</div>
+                        ))}
                     </Form.Group>
                     <Form.Group className="mb-3 w-75" controlId="formBasicEmail">
                         <Form.Label className='text-white'>Email address</Form.Label>
@@ -53,13 +65,9 @@ export default function SignUp() {
                     <Form.Group className="mb-3 w-75" controlId="formConfirmPassword">
                         <Form.Label className='text-white'>Confirm Password</Form.Label>
                         <Form.Control data-test="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" placeholder="Confirm password" />
-                        {exception && (
-                            <>
-                                <div data-test="exceptionMessage" className="text-danger">
-                                    {exception.response.data.errors.Password[0]}
-                                </div>
-                            </>
-                        )}
+                        {errors?.Password && errors.Password.map((error, index) => (
+                            <div key={index} data-test="passwordError" className="text-danger">{error}</div>
+                        ))}
                     </Form.Group>
                     <Button data-test="signup-btn" variant="primary" type="submit" className='mb-5 w-75'>
                         Submit
