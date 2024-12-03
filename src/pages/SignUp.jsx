@@ -68,6 +68,9 @@ export default function SignUp() {
                         {errors?.Password && errors.Password.map((error, index) => (
                             <div key={index} data-test="passwordError" className="text-danger">{error}</div>
                         ))}
+                        {errors?.ConfirmPassword && errors.ConfirmPassword.map((error, index) => (
+                            <div key={index} data-test="confirmPasswordError" className="text-danger">{error}</div>
+                        ))}
                     </Form.Group>
                     <Button data-test="signup-btn" variant="primary" type="submit" className='mb-5 w-75'>
                         Submit
