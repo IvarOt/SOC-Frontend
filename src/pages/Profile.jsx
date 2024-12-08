@@ -15,7 +15,7 @@ export default function Profile() {
         )
 
     }
-    else {
+    else if (player){
         return (
             <>
                 <div className="row d-flex justify-content-center align-items-center mt-5">
