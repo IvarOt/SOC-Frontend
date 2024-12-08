@@ -1,4 +1,5 @@
 import { useGetPlayer } from "../hooks/PlayerHooks"
+import { blurredBackground } from "../BackgroundStyling";
 
 export default function Profile() {
     const { player, isLoading } = useGetPlayer();
@@ -18,12 +19,13 @@ export default function Profile() {
     else {
         return (
             <>
-                <div className="row d-flex justify-content-center align-items-center mt-5">
+            <div style={blurredBackground("/johnny.jpg")} />
+                <div className="row d-flex justify-content-center align-items-center mt-5" style={{ position: 'relative', zIndex: 2 }}>
                     <div className="col col-lg-10">
                         <div className="card bg-dark border border-black text-white shadow-lg">
                             <div className="row">
                                 <div className="col-md-3 gradient-custom text-center pb-3 bg-dark bg-gradient">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                    <img src="johnny.jpg"
                                         alt="Avatar" className="img-fluid my-5" />
                                     <h5>{player.username}</h5>
                                     <p>{player.email}</p>
