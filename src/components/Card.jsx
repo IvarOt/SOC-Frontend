@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Form from 'react-bootstrap/Form';
-import { EditCardRequest } from '../models/CardModel';
+import { DeleteConfirmationModal } from './DeleteConfirmationModal';
 
 function getContrastYIQ(hexColor) {
     hexColor = hexColor.replace("#", "");
@@ -14,17 +14,49 @@ function getContrastYIQ(hexColor) {
     return brightness > 150 ? "black" : "white";
 }
 
-export function Card({ card }) {
+export function ShopCard({ card, purchaseCard, isPurchased }) {
     const textColor = getContrastYIQ(card.color);
     return (
         <>
             <div className="col-md-3 mb-4">
-                <div className="card bg-info bg-gradient px-3" style={{ color: textColor }}>
+                <div className="card bg-gradient px-3 shadow-lg border border-dark" style={{ backgroundColor: card.color, color: textColor }}>
                     <div className='card-header d-flex flex-row align-items-center px-0'>
-                        <h1 className="d-flex flex-grow-1">{card.name}</h1>
+                        <h3 className="d-flex flex-grow-1">{card.name}</h3>
                     </div>
                     <div className="bg-light bg-gradient d-flex justify-content-center align-items-center shadow-lg">
-                        <img className='img-fluid' src={card.imageURL} alt="placeholder" />
+                        <img
+                            className='img-fluid'
+                            src={card.imageURL}
+                            style={{ width: "100%", height: "300px", objectFit: "cover" }}
+                        />
+                    </div>
+                    <div className='card-footer px-0'>
+                        <p className="mb-2"><img width="30" height="30" src="https://img.icons8.com/fluency/48/hearts.png" alt="hearts" /> {card.hp}</p>
+                        <p className="mb-2"><img width="30" height="30" src="https://img.icons8.com/windows/32/sword.png" alt="sword" /> {card.dmg}</p>
+                        <p className="mb-2"><img width="30" height="30" src="https://cdn0.iconfinder.com/data/icons/cash-card-starters-colored/48/JD-03-1024.png" alt="coins" /> {card.cost}</p>
+                    </div>
+                <button className="btn btn-warning w-100 mb-3" onClick={() => purchaseCard(card.id)} disabled={isPurchased ? true : false}>Purchase</button>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export function GameCard({ card }) {
+    const textColor = getContrastYIQ(card.color);
+    return (
+        <>
+            <div className="col-md-3 mb-4">
+                <div className="card bg-gradient px-3 shadow-lg border border-dark" style={{ backgroundColor: card.color, color: textColor }}>
+                    <div className='card-header d-flex flex-row align-items-center px-0'>
+                        <h3 className="d-flex flex-grow-1">{card.name}</h3>
+                    </div>
+                    <div className="bg-light bg-gradient d-flex justify-content-center align-items-center shadow-lg">
+                        <img
+                            className='img-fluid'
+                            src={card.imageURL}
+                            style={{ width: "100%", height: "300px", objectFit: "cover" }}
+                        />
                     </div>
                     <div className='card-footer px-0'>
                         <p className="mb-2"><img width="30" height="30" src="https://img.icons8.com/fluency/48/hearts.png" alt="hearts" /> {card.hp}</p>
@@ -43,6 +75,7 @@ export function CardModal({ card = null, isEdit = false, createCard, editCard })
     const [dmg, setDmg] = useState(card ? card.dmg : 0);
     const [color, setColor] = useState(card ? card.color : "#FFFFFF");
     const [image, setImage] = useState(null);
+    const [cost, setCost] = useState(card ? card.cost : 0);
     const [textColor, setTextColor] = useState(getContrastYIQ(color));
     const [imagePreview, setImagePreview] = useState(card ? card.imageURL : imagePlaceholder);
 
@@ -75,6 +108,7 @@ export function CardModal({ card = null, isEdit = false, createCard, editCard })
             formData.append("HP", hp);
             formData.append("DMG", dmg);
             formData.append("Color", color);
+            formData.append("Cost", cost);
             if (image) {
                 formData.append("Image", image);
             }
@@ -86,6 +120,7 @@ export function CardModal({ card = null, isEdit = false, createCard, editCard })
             formData.append("HP", hp);
             formData.append("DMG", dmg);
             formData.append("Color", color);
+            formData.append("Cost", cost);
             if (image) {
                 formData.append("Image", image);
             }
@@ -146,6 +181,17 @@ export function CardModal({ card = null, isEdit = false, createCard, editCard })
                                 className="form-control border-dark bg-dark text-white"
                                 required
                             />
+                            <div className='d-flex flex-row align-content-center w-100'>
+                                <img className='me-1' width="20" height="20" src="https://cdn0.iconfinder.com/data/icons/cash-card-starters-colored/48/JD-03-1024.png" alt="coins" />
+                                <label htmlFor="cost" className="form-label">Cost</label>
+                            </div>
+                            <input
+                                type="number"
+                                value={cost}
+                                onChange={(e) => setCost(e.target.value)}
+                                className="form-control border-dark bg-dark text-white"
+                                required
+                            />
                             <Form.Label htmlFor="exampleColorInput">Color picker</Form.Label>
                             <Form.Control
                                 type="color"
@@ -173,14 +219,17 @@ export function CardModal({ card = null, isEdit = false, createCard, editCard })
 
 export function AdminCard({ card, deleteCard, editCard, createCard }) {
     const textColor = getContrastYIQ(card.color);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+
     return (
         <>
+            <DeleteConfirmationModal show={showDeleteModal} onClose={() => setShowDeleteModal(false)} onConfirm={() => deleteCard(card)} />
             <div className="col-md-3 mb-4">
                 <div className="card bg-gradient px-3 shadow-lg border border-dark" style={{ backgroundColor: card.color, color: textColor }}>
                     <div className='card-header d-flex flex-row align-items-center px-0'>
                         <h3 className="d-flex flex-grow-1">{card.name}</h3>
                         <CardModal card={card} isEdit={true} editCard={editCard} createCard={createCard} />
-                        <button className='btn btn-danger' onClick={() => deleteCard(card)}>
+                        <button className='btn btn-danger' onClick={() => setShowDeleteModal(true)}>
                             <FontAwesomeIcon icon={faTrash} />
                         </button>
                     </div>
@@ -194,6 +243,7 @@ export function AdminCard({ card, deleteCard, editCard, createCard }) {
                     <div className='card-footer px-0'>
                         <p className="mb-2"><img width="30" height="30" src="https://img.icons8.com/fluency/48/hearts.png" alt="hearts" /> {card.hp}</p>
                         <p className="mb-2"><img width="30" height="30" src="https://img.icons8.com/windows/32/sword.png" alt="sword" /> {card.dmg}</p>
+                        <p className="mb-2"><img width="30" height="30" src="https://cdn0.iconfinder.com/data/icons/cash-card-starters-colored/48/JD-03-1024.png" alt="coins" /> {card.cost}</p>
                     </div>
                 </div>
             </div>

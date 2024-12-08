@@ -1,13 +1,12 @@
+import { blurredBackground } from "../BackgroundStyling";
 
 function Home() {
     return (
-<<<<<<< Updated upstream
-        <div className="d-flex justify-content-center align-items-center flex-column mt-5">
-    <img src="/Logo.webp" className="w-25 shadow-lg rounded mb-3" alt="Logo" />
-    <h1 className="text-center">Welcome to Saga Of Cards!</h1>
-</div>
-=======
         <>
+            <div className="d-flex justify-content-center align-items-center flex-column mt-5">
+                <img src="/Logo.webp" className="w-25 shadow-lg rounded mb-3" alt="Logo" />
+                <h1 className="text-center">Welcome to Saga Of Cards!</h1>
+            </div>
             <div style={blurredBackground("/home-background.webp")} />
             <div className="m-5 d-flex flex-row" style={{ position: 'relative', zIndex: 2 }}>
                 <div className="flex-grow-1">
@@ -51,7 +50,6 @@ function Home() {
                 </div>
             </div>
         </>
->>>>>>> Stashed changes
     );
 }
 

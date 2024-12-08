@@ -54,8 +54,24 @@ export const useGetPlayer = () => {
 }
 
 export const useCreateAccount = () => {
-    const { execute, isLoading, errorMessage } = useAsync(playerService.createAccount);
-    return { createAccount: execute, isLoading, errorMessage };
+    const [isLoading, setIsLoading] = useState(false);
+
+    const createAccount = async (player) => {
+        setIsLoading(true);
+        try {
+            const response = await playerService.createAccount(player);
+            return response;
+        } 
+        catch (error) {
+            setIsLoading(false);
+            throw error;
+        }
+        finally {
+            setIsLoading(false);
+        }
+    }
+
+    return { createAccount, isLoading };
 }
 
 export const useEditProfile = () => {
