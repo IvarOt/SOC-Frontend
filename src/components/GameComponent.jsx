@@ -27,7 +27,7 @@ const GameComponent = () => {
                                             <h6>Cards:</h6>
                                             <div className="row g-4">
                                                 {player.cards.map((card, index) => (
-                                                        <GameCard key={index} card={card.card} />
+                                                        <GameCard key={index} card={card} />
                                                 ))}
                                             </div>
                                         </>
@@ -36,7 +36,7 @@ const GameComponent = () => {
                                     )}
                                     <h6>Shop:</h6>
                                     <div className="row g-4">
-                                        {player.shop.availableCards.map((card, index) => (
+                                        {player.shop.cardsForSale.map((card, index) => (
                                                 <ShopCard key={index} isPurchased={card.isPurchased} purchaseCard={purchaseCard} card={card.card} playerId={player.id} />
                                         ))}
                                     </div>

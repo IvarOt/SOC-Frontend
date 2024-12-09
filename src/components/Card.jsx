@@ -43,18 +43,18 @@ export function ShopCard({ card, purchaseCard, isPurchased }) {
 }
 
 export function GameCard({ card }) {
-    const textColor = getContrastYIQ(card.color);
+    const textColor = getContrastYIQ(card.card.color);
     return (
         <>
             <div className="col-md-3 mb-4">
-                <div className="card bg-gradient px-3 shadow-lg border border-dark" style={{ backgroundColor: card.color, color: textColor }}>
+                <div className="card bg-gradient px-3 shadow-lg border border-dark" style={{ backgroundColor: card.card.color, color: textColor }}>
                     <div className='card-header d-flex flex-row align-items-center px-0'>
-                        <h3 className="d-flex flex-grow-1">{card.name}</h3>
+                        <h3 className="d-flex flex-grow-1">{card.card.name}</h3>
                     </div>
                     <div className="bg-light bg-gradient d-flex justify-content-center align-items-center shadow-lg">
                         <img
                             className='img-fluid'
-                            src={card.imageURL}
+                            src={card.card.imageURL}
                             style={{ width: "100%", height: "300px", objectFit: "cover" }}
                         />
                     </div>

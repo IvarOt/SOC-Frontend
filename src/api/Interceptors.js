@@ -1,5 +1,6 @@
 import { instance } from "../api/api"
 import { getLocalAccesToken, UpdateLocalAccesToken } from "../services/TokenService";
+import { useAuth } from "../contexts/AuthContext";
 
 instance.interceptors.response.use(
     (response) => {
@@ -19,9 +20,11 @@ instance.interceptors.response.use(
                 return instance(originalRequest);
             }
             catch (error) {
+                useAuth().logout();
                 return Promise.reject(error);
             }
         }
+        useAuth().logout();
         return Promise.reject(error);
     }
   );
