@@ -72,7 +72,18 @@ const useGameHub = () => {
             }
         }
     };
-    return { gameState, startGame, resolveFight, purchaseCard, endGame };
+
+    const passTurn = async () => {
+        if (connection) {
+            try {
+                await connection.invoke('PassTurn');
+            } catch (e) {
+                console.error('PassTurn failed: ', e);
+            }
+        }
+    };
+
+    return { gameState, startGame, resolveFight, purchaseCard, endGame, passTurn };
 };
 
 export default useGameHub;
