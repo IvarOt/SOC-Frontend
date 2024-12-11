@@ -1,8 +1,9 @@
-import { useContext, createContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { setupAxiosInterceptors } from "../api/Interceptors";
 import { loginPlayer } from "../services/PlayerService";
-import { jwtDecode } from "jwt-decode";
-import { UpdateLocalAccesToken, getLocalAccesToken } from "../services/TokenService";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {jwtDecode} from "jwt-decode";
+import { getLocalAccesToken, UpdateLocalAccesToken } from "../services/TokenService";
 
 const AuthContext = createContext();
 
@@ -23,6 +24,8 @@ const AuthProvider = ({ children }) => {
                 localStorage.removeItem("site");
             }
         }
+        // Setup Axios interceptors with logout function
+        setupAxiosInterceptors(logout);
     }, []);
 
     const login = async (data) => {
@@ -31,7 +34,7 @@ const AuthProvider = ({ children }) => {
             const response = await loginPlayer(data);
             if (response.data) {
                 setToken(response.data);
-                UpdateLocalAccesToken(token);
+                UpdateLocalAccesToken(response.data);
                 navigate("/CardList");
                 return;
             }
@@ -42,6 +45,7 @@ const AuthProvider = ({ children }) => {
             setErrorMessage(errorMessage);
         }
     };
+
     const logout = () => {
         setUser(null);
         setToken("");
@@ -55,6 +59,7 @@ const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
+
 export default AuthProvider;
 
 export const useAuth = () => {

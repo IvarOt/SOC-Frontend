@@ -28,6 +28,10 @@ const useGameHub = () => {
                     connection.on('GameEnded', () => {
                         console.log('The game has ended.');
                     });
+
+                    connection.onclose(() => {
+                        console.log('Connection closed.');
+                    });
                 })
                 .catch(e => console.log('Connection failed: ', e));
         }
@@ -72,7 +76,18 @@ const useGameHub = () => {
             }
         }
     };
-    return { gameState, startGame, resolveFight, purchaseCard, endGame };
+
+    const passTurn = async () => {
+        if (connection) {
+            try {
+                await connection.invoke('PassTurn');
+            } catch (e) {
+                console.error('PassTurn failed: ', e);
+            }
+        }
+    };
+
+    return { gameState, startGame, resolveFight, purchaseCard, endGame, passTurn, connection };
 };
 
 export default useGameHub;

@@ -24,3 +24,7 @@ export const loginPlayer = async (player) => {
     const response = await instance.post(`${controller}/Login`, player);
     return response;
 };
+
+export const getMatchHistory = async (id) => instance.get(`${controller}/MatchHistory?PlayerId=${id}`);
+
+export const changeAvatar = async (id, url) => instance.put(`${controller}/ChangeAvatar?PlayerId=${id}&imageURL=${url}`);
