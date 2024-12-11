@@ -2,7 +2,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useCreateAccount } from '../hooks/PlayerHooks';
 import { useState } from 'react';
-import { RegisterPlayerRequest } from '../models/PlayerModel';
 import { useNavigate } from 'react-router-dom';
 import { blurredBackground } from '../BackgroundStyling';
 
@@ -17,9 +16,13 @@ export default function SignUp() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const player = new RegisterPlayerRequest(username, email, password, confirmPassword);
+        const formData = new FormData();
+        formData.append("username", username);
+        formData.append("email", email);
+        formData.append("password", password);
+        formData.append("confirmPassword", confirmPassword);
         try {
-            const response = await createAccount(player);
+            const response = await createAccount(formData);
             console.log(response);
             if (response.status === 200) {
                 navigate("/login");
