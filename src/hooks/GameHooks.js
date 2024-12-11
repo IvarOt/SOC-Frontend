@@ -28,6 +28,10 @@ const useGameHub = () => {
                     connection.on('GameEnded', () => {
                         console.log('The game has ended.');
                     });
+
+                    connection.onclose(() => {
+                        console.log('Connection closed.');
+                    });
                 })
                 .catch(e => console.log('Connection failed: ', e));
         }
@@ -83,7 +87,7 @@ const useGameHub = () => {
         }
     };
 
-    return { gameState, startGame, resolveFight, purchaseCard, endGame, passTurn };
+    return { gameState, startGame, resolveFight, purchaseCard, endGame, passTurn, connection };
 };
 
 export default useGameHub;

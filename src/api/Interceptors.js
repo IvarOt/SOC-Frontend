@@ -21,7 +21,6 @@ export const setupAxiosInterceptors = (logout) => {
                     return Promise.reject(error);
                 }
             }
-            logout();
             return Promise.reject(error);
         }
     );
