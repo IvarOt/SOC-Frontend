@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useAuth } from "../contexts/AuthContext";
-import { LoginPlayerRequest } from '../models/PlayerModel';
 import { blurredBackground } from '../BackgroundStyling';
 
 export default function Login() {
@@ -13,8 +12,10 @@ export default function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (username !== "" && [password !== ""]) {
-            const user = new LoginPlayerRequest(username, password);
-            auth.login(user);
+            const formData = new FormData();
+            formData.append("username", username);
+            formData.append("password", password);
+            auth.login(formData);
             return;
         }
     }

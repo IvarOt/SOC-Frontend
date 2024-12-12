@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { instance } from '../api/api'
-import { createEditCardRequest } from '../models/CardModel';
 
 const controller = "Cards";
 
@@ -10,8 +9,9 @@ export const getCards = async () => {
 }
 
 export const getCard = async (id) => {
+    const [card, setCard] = useState({ name: "", hp: 0, dmg: 0, color: "#563d7c" });
     const data = instance.get(controller, id);
-    return data.map(createEditCardRequest);
+    return data.map(card);
 } 
 
 export const createCard = async (card) => instance.post(controller, card, {
