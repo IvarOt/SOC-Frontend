@@ -87,7 +87,7 @@ const useGameHub = () => {
         }
     };
 
-    return { gameState, startGame, resolveFight, purchaseCard, endGame, passTurn, connection };
+    return { gameState, startGame, resolveFight, purchaseCard, endGame, passTurn };
 };
 
 export default useGameHub;

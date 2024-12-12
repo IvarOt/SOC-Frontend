@@ -15,7 +15,7 @@ function Home() {
                         </div>
                     </header>
                     <div className="container my-5">
-                        <p className="lead">Step into a world where strategy, skill, and cunning collide in thrilling battles! <strong>Saga of Cards</strong> offers a unique, turn-based experience where every decision counts. Collect powerful cards, build your ultimate deck, and face off against friends or AI opponents in epic duels.</p>
+                        <p className="lead">Step into a world where strategy, skill, and cunning collide in thrilling battles! <strong>Saga of Cards</strong> offers a unique, turn-based experience where every decision counts. Collect powerful cards, build your ultimate deck, and face off against AI opponents in epic duels.</p>
 
                         <p className="mb-4">Whether you're looking to challenge yourself, unlock new quests, or simply enjoy a relaxing game, <strong>Saga of Cards</strong> is your new go-to card battler.</p>
 
