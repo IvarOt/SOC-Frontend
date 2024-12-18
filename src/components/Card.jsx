@@ -19,11 +19,11 @@ export function ShopCard({ card, purchaseCard, isPurchased }) {
     return (
         <>
             <div className="col-md-3 mb-4">
-                <div className="card bg-gradient px-3 shadow-lg border border-dark" style={{ backgroundColor: card.color, color: textColor }}>
+                <div className="card bg-gradient px-3 border border-dark col" style={{ backgroundColor: card.color, color: textColor }}>
                     <div className='card-header d-flex flex-row align-items-center px-0'>
-                        <h5 className="d-flex flex-grow-1">{card.name}</h5>
+                    <h5 className="d-flex flex-grow-1 text-truncate">{card.name}</h5>
                     </div>
-                    <div className="bg-light bg-gradient d-flex justify-content-center align-items-center shadow-lg">
+                    <div className="d-flex justify-content-center align-items-center">
                         <img
                             className='img-fluid'
                             src={card.imageURL}
@@ -34,8 +34,8 @@ export function ShopCard({ card, purchaseCard, isPurchased }) {
                         <p className="mb-2"><img width="30" height="30" src="https://img.icons8.com/fluency/48/hearts.png" alt="hearts" /> {card.hp}</p>
                         <p className="mb-2"><img width="30" height="30" src="https://img.icons8.com/windows/32/sword.png" alt="sword" /> {card.dmg}</p>
                         <p className="mb-2"><img width="30" height="30" src="https://cdn0.iconfinder.com/data/icons/cash-card-starters-colored/48/JD-03-1024.png" alt="coins" /> {card.cost}</p>
+                        <button className="btn btn-warning w-100 mb-3 border border border-dark" onClick={() => purchaseCard(card.id)} disabled={isPurchased ? true : false}>Purchase</button>
                     </div>
-                <button className="btn btn-warning w-100 mb-3" onClick={() => purchaseCard(card.id)} disabled={isPurchased ? true : false}>Purchase</button>
                 </div>
             </div>
         </>
@@ -49,7 +49,7 @@ export function GameCard({ card }) {
             <div className="col-md-3 mb-4">
                 <div className="card bg-gradient px-3 shadow-lg border border-dark" style={{ backgroundColor: card.card.color, color: textColor }}>
                     <div className='card-header d-flex flex-row align-items-center px-0'>
-                        <h5 className="d-flex flex-grow-1">{card.card.name}</h5>
+                    <h5 className="d-flex flex-grow-1 text-truncate">{card.card.name}</h5>
                     </div>
                     <div className="bg-light bg-gradient d-flex justify-content-center align-items-center shadow-lg">
                         <img

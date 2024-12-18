@@ -1,50 +1,57 @@
 import React from 'react';
 import useGameHub from '../hooks/GameHooks';
 import { ShopCard, GameCard } from './Card';
+import { ShopModal } from './ShopModal';
+import { blurredBackground } from '../BackgroundStyling';
 
 const GameComponent = () => {
-    const { gameState, startGame, resolveFight, endGame, purchaseCard, passTurn } = useGameHub();
+    const { gameState, startGame, resolveFight, endGame, purchaseCard, passTurn, actionExectued } = useGameHub();
 
     return (
         <>
-            <div className="container mt-3">
-                <h1 className="mb-4">Game Component</h1>
-                {gameState && (
+            <div style={blurredBackground("https://wallpaperaccess.com/full/279729.jpg")} />
+            <div className="container mt-3" style={{ position: 'relative', zIndex: 2 }}>
+                {gameState ? (
                     !gameState.GameEnded ? (
-                        <div className="card mb-4">
+                        <div className="card bg-dark bg-gradient mb-4 text-light">
                             <div className="card-header">
-                                Game State
+                                <h5 className="card-title">Turn Number: {gameState.turnNumber}</h5>
                             </div>
                             <div className="card-body">
-                                <h5 className="card-title">Turn Number: {gameState.turnNumber}</h5>
-                                <div className="mb-3">
-                                    <h6>Players:</h6>
+                                <div className="mb-3 row">
                                     {gameState.players.map(player => (
-                                        <div key={player.id} className="mb-3">
+                                        <div key={player.id} className="mb-3 col">
                                             <h5>{player.name}</h5>
-                                            <p>HP: {player.hp}</p>
-                                            <p>Coins: {player.coins}</p>
+                                            <div className='d-flex justify-content-start'>
+                                                <p className="mb-2 me-5"><img width="30" height="30" src="https://img.icons8.com/fluency/48/hearts.png" alt="hearts" /> {player.hp}</p>
+                                                <p className="mb-2"><img width="30" height="30" src="https://cdn0.iconfinder.com/data/icons/cash-card-starters-colored/48/JD-03-1024.png" alt="coins" /> {player.coins}</p>
+                                            </div>
+                                            <ShopModal shop={player.shop} purchaseCard={purchaseCard} />
                                             {player.cards.length > 0 ? (
                                                 <>
                                                     <h6>Cards:</h6>
-                                                    <div className="row g-4">
+                                                    <div className="row">
                                                         {player.cards.map((card, index) => (
                                                             <GameCard key={index} card={card} />
                                                         ))}
                                                     </div>
                                                 </>
                                             ) : (
-                                                <p>No cards in hand</p>
+                                                <>
+                                                    <p>No cards in hand</p>
+                                                </>
                                             )}
-                                            <h6>Shop:</h6>
-                                            <div className="row g-4">
-                                                {player.shop.cardsForSale.map((card, index) => (
-                                                    <ShopCard key={index} card={card.card} purchaseCard={purchaseCard} isPurchased={card.isPurchased} />
-                                                ))}
-                                            </div>
                                         </div>
                                     ))}
                                 </div>
+                            </div>
+                            <div className='card-footer p-2'>
+                                {actionExectued ? (
+                                <button className="btn btn-secondary me-2" onClick={resolveFight}>Resolve Fight</button>
+                                ) : (
+                                    <button className="btn btn-warning me-2" onClick={passTurn}>Pass Turn</button>
+                                )}
+                                <button className="btn btn-danger" onClick={endGame}>End Game</button>
                             </div>
                         </div>
                     ) : (
@@ -59,11 +66,9 @@ const GameComponent = () => {
                             </div>
                         </div>
                     )
-                )}
+                ) : (
                 <button className="btn btn-primary me-2" onClick={startGame}>Start Game</button>
-                <button className="btn btn-secondary me-2" onClick={resolveFight}>Resolve Fight</button>
-                <button className="btn btn-warning me-2" onClick={passTurn}>Pass Turn</button>
-                <button className="btn btn-danger" onClick={endGame}>End Game</button>
+            )}
             </div>
         </>
     );
