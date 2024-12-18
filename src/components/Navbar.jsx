@@ -30,12 +30,12 @@ function Navbar() {
                             <>
                                 <li className="nav-item me-4">
                                     <Link to="/Login" className="nav-link active">
-                                        <img width="24" height="24" src="https://img.icons8.com/material-outlined/24/FFFFFF/gallery.png" alt="gallery" />Login
+                                        <img width="24" height="24" src="https://img.icons8.com/material-outlined/24/FFFFFF/gallery.png" data-test="navigateToLogin" alt="gallery" />Login
                                     </Link>
                                 </li>
                                 <li className="nav-item me-4">
                                     <Link to="/SignUp" className="nav-link active">
-                                        <img width="24" height="24" src="https://img.icons8.com/material-outlined/24/FFFFFF/gallery.png" alt="gallery" />Sign Up
+                                        <img width="24" height="24" src="https://img.icons8.com/material-outlined/24/FFFFFF/gallery.png" data-test="navigateToSignUp" alt="gallery" />Sign Up
                                     </Link>
                                 </li>
                             </>
