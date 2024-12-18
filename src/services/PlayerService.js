@@ -9,7 +9,10 @@ export const getPlayers = async () => instance.get(controller);
 export const getPlayer = async (id) => instance.get(`${controller}/${id}`);
 
 //sign up
-export const createAccount = async (player) => instance.post(controller, player);
+export const createAccount = async (player) => {
+    const response = await instance.post(controller, player);
+    return response;
+}
 
 //changing account information
 export const editProfile = async (player) => instance.put(controller, player);
@@ -21,3 +24,7 @@ export const loginPlayer = async (player) => {
     const response = await instance.post(`${controller}/Login`, player);
     return response;
 };
+
+export const getMatchHistory = async (id) => instance.get(`${controller}/MatchHistory?PlayerId=${id}`);
+
+export const changeAvatar = async (id, url) => instance.put(`${controller}/ChangeAvatar?PlayerId=${id}&imageURL=${url}`);
