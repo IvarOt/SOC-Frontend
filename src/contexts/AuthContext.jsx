@@ -24,7 +24,6 @@ const AuthProvider = ({ children }) => {
                 localStorage.removeItem("site");
             }
         }
-        // Setup Axios interceptors with logout function
         setupAxiosInterceptors(logout);
     }, []);
 
@@ -35,6 +34,8 @@ const AuthProvider = ({ children }) => {
             if (response.data) {
                 setToken(response.data);
                 UpdateLocalAccesToken(response.data);
+                const decodedUser = jwtDecode(response.data); 
+                setUser(decodedUser);
                 navigate("/CardList");
                 return;
             }

@@ -46,7 +46,7 @@ export function GameCard({ card }) {
     const textColor = getContrastYIQ(card.card.color);
     return (
         <>
-            <div className="col-md-3 mb-4">
+            <div className="col">
                 <div className="card bg-gradient px-3 shadow-lg border border-dark" style={{ backgroundColor: card.card.color, color: textColor }}>
                     <div className='card-header d-flex flex-row align-items-center px-0'>
                     <h5 className="d-flex flex-grow-1 text-truncate">{card.card.name}</h5>
