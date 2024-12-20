@@ -17,7 +17,7 @@ export function ShopModal({ shop, purchaseCard }) {
 
     return (
         <>
-            <button className='btn btn-primary mb-2' onClick={handleShow}> <FontAwesomeIcon icon={faShop} /> Shop</button>
+            <button className='btn btn-primary btn-sm' onClick={handleShow}> <FontAwesomeIcon icon={faShop} /> Shop</button>
             <Modal show={show} onHide={handleClose} size='xl' centered>
                 <div className='bg-dark-subtle bg-gradient text-light'>
                     <Modal.Header closeButton className='bg-light text-black border-black'>
