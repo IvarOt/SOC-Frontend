@@ -33,8 +33,8 @@ function Navbar() {
                                         <img width="24" height="24" src="https://img.icons8.com/material-outlined/24/FFFFFF/gallery.png" alt="gallery" />Login
                                     </Link>
                                 </li>
-                                <li className="nav-item me-4" data-test="navigateToSignUp">
-                                    <Link to="/SignUp" className="nav-link active">
+                                <li className="nav-item me-4" >
+                                    <Link to="/SignUp" className="nav-link active" data-test="navigateToSignUp">
                                         <img width="24" height="24" src="https://img.icons8.com/material-outlined/24/FFFFFF/gallery.png" alt="gallery" />Sign Up
                                     </Link>
                                 </li>
