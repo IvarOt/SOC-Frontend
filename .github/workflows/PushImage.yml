@@ -19,6 +19,6 @@ jobs:
           run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
         - name: Push image
-          run: docker push ghcr.io/${{ github.repository_owner }}/sagaofcards-frontend:latest
+          run: docker push ghcr.io/ivarot/sagaofcards-frontend:latest
           
         
