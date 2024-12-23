@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: "http://sagaofcards-container:8080/",
+    baseURL:  import.meta.env.VITE_API_URL || "https://localhost:7146/",
     headers: {
         "Content-Type": "application/json",
     },
