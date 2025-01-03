@@ -21,6 +21,11 @@ function Navbar() {
                                 <img width="24" height="24" src="https://img.icons8.com/material-outlined/24/FFFFFF/bank-card-back-side.png" alt="bank-card-back-side" />Game
                             </Link>
                         </li>
+                        <li className="nav-item me-4">
+                            <Link to="/GameFrame" className="nav-link active">
+                                <img width="24" height="24" src="https://img.icons8.com/material-outlined/24/FFFFFF/bank-card-back-side.png" alt="bank-card-back-side" />GameFrame
+                            </Link>
+                        </li>
                     </ul>
                 </div>
 

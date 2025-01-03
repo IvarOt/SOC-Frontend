@@ -17,7 +17,6 @@ export const setupAxiosInterceptors = (logout) => {
                     originalRequest.headers.Authorization = 'Bearer ' + access_token;
                     return instance(originalRequest);
                 } catch (error) {
-                    logout();
                     return Promise.reject(error);
                 }
             }

@@ -19,13 +19,16 @@ const GameComponent = () => {
                             </div>
                             <div className="card-body">
                                 <div className="row d-flex justify-content-evenly">
-                                    {gameState.players.map(player => (
+                                    {gameState.players.map((player, index) => (
                                         <div key={player.id} className="mb-3 col card m-2">
                                             <div className='d-flex justify-content-start align-items-start mt-2'>
                                                 <p className="me-5 fw-bold">{player.name}</p>
                                                 <p className="me-5"><img width="25" height="25" src="https://img.icons8.com/fluency/48/hearts.png" alt="hearts" /> {player.hp}</p>
                                                 <p className="me-5"><img width="25" height="25" src="https://cdn0.iconfinder.com/data/icons/cash-card-starters-colored/48/JD-03-1024.png" alt="coins" /> {player.coins}</p>
+                                                {index == 0 && (
                                                 <ShopModal shop={player.shop} purchaseCard={purchaseCard} />
+                                                )
+                                                }
                                             </div>
                                             {player.cards.length > 0 ? (
                                                 <>

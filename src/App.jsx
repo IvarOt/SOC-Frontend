@@ -8,6 +8,7 @@ import AuthProvider from './contexts/AuthContext.jsx'
 import PrivateRoute from './components/PrivateRoute.jsx'
 import Profile from './pages/Profile.jsx'
 import GameComponent from './components/GameComponent.jsx'
+import GameFrame from './pages/GameFrame.jsx'
 import './api/Interceptors'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route path="CardList" element={<CardManager />} />
             <Route path="Game" element={<GameComponent />} />
+            <Route path="GameFrame" element={<GameFrame />} />
             <Route path="Profile" element={<Profile />} />
           </Route>
         </Routes>

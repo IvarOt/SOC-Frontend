@@ -1,0 +1,8 @@
+.card-container:hover {
+    height: 410px;
+}
+
+.fixed-height {
+    height: 230px; 
+    transition: height 0.3s ease-in-out;
+}

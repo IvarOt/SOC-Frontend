@@ -21,7 +21,7 @@ export function ShopCard({ card, purchaseCard, isPurchased }) {
             <div className="col-md-3 mb-4">
                 <div className="card bg-gradient px-3 border border-dark col" style={{ backgroundColor: card.color, color: textColor }}>
                     <div className='card-header d-flex flex-row align-items-center px-0'>
-                    <h5 className="d-flex flex-grow-1 text-truncate">{card.name}</h5>
+                        <h5 className="d-flex flex-grow-1 text-truncate">{card.name}</h5>
                     </div>
                     <div className="d-flex justify-content-center align-items-center">
                         <img
@@ -46,22 +46,20 @@ export function GameCard({ card }) {
     const textColor = getContrastYIQ(card.card.color);
     return (
         <>
-            <div className="col">
-                <div className="card bg-gradient px-3 shadow-lg border border-dark" style={{ backgroundColor: card.card.color, color: textColor }}>
-                    <div className='card-header d-flex flex-row align-items-center px-0'>
+            <div className="card bg-gradient px-3 shadow-lg border border-dark my-3 mx-2" style={{ backgroundColor: card.card.color, color: textColor }}>
+                <div className='card-header d-flex flex-row align-items-center px-0'>
                     <h5 className="d-flex flex-grow-1 text-truncate">{card.card.name}</h5>
-                    </div>
-                    <div className="bg-light bg-gradient d-flex justify-content-center align-items-center shadow-lg">
-                        <img
-                            className='img-fluid'
-                            src={card.card.imageURL}
-                            style={{ width: "100%", height: "300px", objectFit: "cover" }}
-                        />
-                    </div>
-                    <div className='card-footer px-0'>
-                        <p className="mb-2"><img width="30" height="30" src="https://img.icons8.com/fluency/48/hearts.png" alt="hearts" /> {card.hp}</p>
-                        <p className="mb-2"><img width="30" height="30" src="https://img.icons8.com/windows/32/sword.png" alt="sword" /> {card.dmg}</p>
-                    </div>
+                </div>
+                <div className="bg-light bg-gradient d-flex justify-content-center align-items-center shadow-lg">
+                    <img
+                        className='img-fluid'
+                        src={card.card.imageURL}
+                        style={{objectFit: "cover" }}
+                    />
+                </div>
+                <div className='card-footer px-0'>
+                    <p className="mb-2"><img width="30" height="30" src="https://img.icons8.com/fluency/48/hearts.png" alt="hearts" /> {card.hp}</p>
+                    <p className="mb-2"><img width="30" height="30" src="https://img.icons8.com/windows/32/sword.png" alt="sword" /> {card.dmg}</p>
                 </div>
             </div>
         </>
